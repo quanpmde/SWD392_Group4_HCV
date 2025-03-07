@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra | THI247</title>
+    <meta content="" name="keywords" />
+    <meta content="" name="description" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+
+<body>
+
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="home.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"> </i> THI247</h2>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="justify-content: space-evenly">
+            <a href="home.html" class="nav-item nav-link tag active">Trang Chủ</a>
+            <a href="forum.html" class="nav-item nav-link tag">Diễn Đàn</a>
+            <a href="exam.html" class="nav-item nav-link tag">Kiểm Tra</a>
+            <a href="quizlet.html" class="nav-item nav-link tag">Tự học</a>
+        </div>
+        <a href="authentication.html" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Tham gia ngay <i
+                class="fa fa-arrow-right ms-3" style="right: 100%"></i></a>
+    </nav>
+
+    <!-- Back button & Search bar -->
+    <nav class="navbar navbar-expand-lg bg-white" style="justify-content: space-between;">
+        <button class="btn btn-link" id="back-button" style="display: none;">← Quay lại</button>
+        <div class="search-container">
+            <form action="#" method="get" class="d-flex">
+                <input type="text" placeholder="Tìm kiếm..." class="form-control me-2" />
+                <button type="submit" class="btn btn-outline-primary"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <div class="ms-auto">
+            <a href="" class="nav-item nav-link tag">Lịch sử</a>
+        </div>
+    </nav>
+    <!-- Navbar End -->
+
+
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <!-- Các môn học sẽ được thêm vào đây từ API -->
+        </ul>
+    </aside>
+
+
+    <!-- Main content -->
+    <div id="exam-list" class="container mt-5">
+        <h3 class="text-center">Danh Sách Bài Thi</h3>
+        <div class="row" id="exam-container">
+            <!-- Các bài thi sẽ được hiển thị ở đây -->
+        </div>
+    </div>
+
+    <!-- Exam Detail View (ẩn mặc định) -->
+    <div id="exam-detail" class="container mt-5" style="display: none;">
+        <div class="card">
+            <div class="card-header text-white" id="exam-header"
+                style="background-size: cover; background-position: center;">
+                <h3 id="subjectName" class="text-center m-0"></h3>
+            </div>
+            <div class="card-body text-center">
+                <h4 id="examName"></h4>
+                <div class="user-info d-flex justify-content-center align-items-center mb-3">
+                    <img src="" id="userImage" alt="User Image" class="img-thumbnail"
+                        style="width: 50px; height: 50px; margin-right: 10px;">
+                    <div>
+                        <p id="userName" class="m-0">Tên Người Dùng</p>
+                        <span id="userRole" class="badge bg-secondary">Vai trò</span>
+                    </div>
+                </div>
+                <p>Thời gian mở: <span id="examStartDate"></span></p>
+                <p>Thời gian đóng: <span id="examEndDate"></span></p>
+                <p><span id="examTimer"></span> cho <span id="examTotalQuestion"></span> câu hỏi</p>
+                <p id="examDescription"></p>
+                <div class="text-center">
+                    <button class="btn btn-primary" id="take-exam-button">Làm bài thi</button>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-around">
+                <button class="btn btn-outline-secondary" id="examLikeCount">0 Lượt thích</button>
+                <button class="btn btn-outline-secondary" id="examCommentCount">0 Bình luận</button>
+                <button class="btn btn-outline-secondary" id="examViewCount">0 Lượt xem</button>
+            </div>
+        </div>
+        <div id="comment-section" class="card mt-3">
+            <div class="card-body text-center">
+                <p>Tính năng bình luận sẽ hiển thị khi bạn hoàn thành bài thi.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Xác nhận</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="confirmModalText">Bạn có muốn làm bài thi này không?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-primary" id="confirmButton">Có</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="js/exam.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diễn Đàn - THI247</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .post-card {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .user-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .post-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 10px 0;
+            color: #495057;
+        }
+
+        .post-content {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #e0e0e0;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .reaction-section {
+            display: flex;
+            gap: 10px;
+        }
+
+        .reaction-section button {
+            background-color: #99a0ff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background-color 0.3s;
+        }
+
+        .reaction-section button:hover {
+            background-color: #6673ff;
+        }
+
+        .views-counter {
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar Start -->
+    <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-0">
+        <a href="home.html" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+            <h2 class="m-0 text-primary"><i class="fa fa-book me-3"></i>THI247</h2>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarCollapse" style="justify-content: space-evenly">
+            <a href="home.html" class="nav-item nav-link tag">Trang Chủ</a>
+            <a href="forum.html" class="nav-item nav-link tag active">Diễn Đàn</a>
+            <a href="exam.html" class="nav-item nav-link tag">Kiểm Tra</a>
+            <a href="quizlet.html" class="nav-item nav-link tag">Tự học</a>
+        </div>
+        <a href="login.html" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Tham gia ngay<i
+                class="fa fa-arrow-right ms-3"></i></a>
+    </nav>
+    <!-- Navbar End -->
+
+    <!-- Forum Container -->
+    <div class="container">
+        <h1 class="mb-5 text-primary text-center">Diễn đàn THI247</h1>
+
+        <!-- Example Post Start -->
+        <div class="post-card">
+            <div class="user-info">
+                <img src="img/anh dung hoai.jpg" alt="Avatar" class="user-avatar">
+                <div>
+                    <div class="user-name">Nguyen Van A</div>
+                    <small class="text-muted">2 giờ trước</small>
+                </div>
+            </div>
+            <div class="post-title">Tiêu đề bài viết của người dùng</div>
+            <div class="post-content">
+                Đây là nội dung bài viết của người dùng. Nội dung có thể chứa văn bản, hình ảnh hoặc các liên kết khác
+                để tương tác.
+            </div>
+            <div class="post-footer">
+                <div class="reaction-section">
+                    <button type="button"><i class="fa fa-thumbs-up"></i> Thích</button>
+                    <button type="button"><i class="fa fa-comment"></i> Bình luận</button>
+                    <button type="button"><i class="fa fa-share"></i> Chia sẻ</button>
+                </div>
+                <div class="views-counter">
+                    <i class="fa fa-eye"></i> 102 lượt xem
+                </div>
+            </div>
+        </div>
+
+        <div class="post-card">
+            <div class="user-info">
+                <img src="img/anh dung hoai.jpg" alt="Avatar" class="user-avatar">
+                <div>
+                    <div class="user-name">Nguyen Van B</div>
+                    <small class="text-muted">2 giờ trước</small>
+                </div>
+            </div>
+            <div class="post-title">Tiêu đề bài viết của người dùng</div>
+            <div class="post-content">
+                Đây là nội dung bài viết của người dùng. Nội dung có thể chứa văn bản, hình ảnh hoặc các liên kết khác
+                để tương tác.
+            </div>
+            <div class="post-footer">
+                <div class="reaction-section">
+                    <button type="button"><i class="fa fa-thumbs-up"></i> Thích</button>
+                    <button type="button"><i class="fa fa-comment"></i> Bình luận</button>
+                    <button type="button"><i class="fa fa-share"></i> Chia sẻ</button>
+                </div>
+                <div class="views-counter">
+                    <i class="fa fa-eye"></i> 102 lượt xem
+                </div>
+            </div>
+        </div>
+        <!-- Example Post End -->
+
+
+    </div>
+
+    <!-- Bootstrap JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script> <!-- For Icons -->
+</body>
+
+</html>
