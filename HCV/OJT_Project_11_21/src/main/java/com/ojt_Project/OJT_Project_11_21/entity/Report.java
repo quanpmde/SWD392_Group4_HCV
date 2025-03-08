@@ -3,7 +3,6 @@ package com.ojt_Project.OJT_Project_11_21.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
