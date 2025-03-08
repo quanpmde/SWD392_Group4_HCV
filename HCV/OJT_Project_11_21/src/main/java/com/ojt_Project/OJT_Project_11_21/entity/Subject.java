@@ -15,7 +15,7 @@ import java.util.List;
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subjectId")
+    @Column(name = "subject_id")
     private int subjectId;
 
     @OneToMany (mappedBy = "subject",cascade = CascadeType.ALL)
@@ -24,9 +24,9 @@ public class Subject {
     @OneToMany (mappedBy = "subject",cascade = CascadeType.ALL)
     private List<Exam> exams;
 
-    @Column(name = "subjectName",length = 50)
+    @Column(name = "subject_name",length = 50)
     private String subjectName;
 
-    @Column(name = "subjectImage",length = 1000)
+    @Column(name = "subject_image",length = 1000)
     private String subjectImage;
 }

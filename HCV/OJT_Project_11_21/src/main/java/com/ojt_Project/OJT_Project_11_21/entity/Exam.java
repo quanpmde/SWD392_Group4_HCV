@@ -17,70 +17,73 @@ import java.util.List;
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "examId")
+    @Column(name = "exam_id")
     private int examId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subjectId",nullable = true)
+    @JoinColumn(name = "subject_id",nullable = true)
     private Subject subject;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "userId",nullable = true)
+    @JoinColumn(name = "user_id",nullable = true)
     private User user;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "exam_questionBank",
-            joinColumns = @JoinColumn(name = "examId"),
-            inverseJoinColumns = @JoinColumn(name = "questionBankId")
+            joinColumns = @JoinColumn(name = "exam_id"),
+            inverseJoinColumns = @JoinColumn(name = "questionBank_id")
     )
     private Collection<QuestionBank> questionBanks;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "exam_question",
-            joinColumns = @JoinColumn(name = "examId"),
-            inverseJoinColumns = @JoinColumn(name = "questionId")
+            joinColumns = @JoinColumn(name = "exam_id"),
+            inverseJoinColumns = @JoinColumn(name = "question_id")
     )
     private List<Question> questions;
 
     @OneToMany(mappedBy = "exam",cascade = CascadeType.ALL)
-    private List<Test> tests;
+    private List<Attempt> attempts;
 
-    @Column(name = "examName",  length = 255)
+    @OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
+    private List<Report> reports ;
+
+    @Column(name = "exam_name",  length = 255)
     private String examName;
 
-    @Column(name = "examPassword", length = 32)
+    @Column(name = "exam_Password", length = 32)
     private String examPassword;
 
-    @Column(name = "examTotalQuestions")
+    @Column(name = "exam_total_questions")
     private int examTotalQuestions;
 
-    @Column(name = "examStartDate")
+    @Column(name = "exam_start_date")
     private LocalDateTime examStartDate;
 
-    @Column(name = "examEndDate")
+    @Column(name = "exam_end_date")
     private LocalDateTime examEndDate;
 
-    @Column(name = "examTimer")
+    @Column(name = "exam_timer")
     private int examTimer;
 
-    @Column(name = "examAttempt")
-    private int examAttempt;
+    @Column(name = "exam_attempt_count")
+    private int examAttemptCount;
 
-    @Column(name = "examViewCount")
+    @Column(name = "exam_view_count")
     private int examViewCount;
 
-    @Column(name = "examLikeCount")
+    @Column(name = "exam_like_count")
     private int examLikeCount;
 
-    @Column(name ="examCommentCount")
+    @Column(name ="exam_comment_count")
     private int examCommentCount;
 
-    @Column(name = "examImage",length = 1000)
+    @Column(name = "exam_image",length = 1000)
     private String examImage;
 
-    @Column(name = "examStatus",length = 50)
+    @Column(name = "exam_status",length = 50)
     private String examStatus;
 
 

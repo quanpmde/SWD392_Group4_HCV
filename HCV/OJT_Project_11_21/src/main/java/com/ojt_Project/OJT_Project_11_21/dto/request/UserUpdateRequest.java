@@ -5,20 +5,20 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 import org.springframework.web.multipart.MultipartFile;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserUpdateRequest {
     private int userId;
+    private String userEmail;
     private String userName;
-    private String fullName;
-    private String email;
-    private String phone;
-    private MultipartFile image;
-    private int isBanned;
-    private boolean isVip;
-    private String role;
-    private int active;
+    private String userPhone;
+    private String userDob;
+    private MultipartFile userImage;
+    private int userVip;
+    private int userBalance;
+    private int userStatus;
 }

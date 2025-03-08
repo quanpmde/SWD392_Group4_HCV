@@ -13,7 +13,7 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 public interface UserMapper {
     User toUser(UserRegisterRequest request);
     UserResponse toUserResponse(User user);
-    @Mapping(source = "image", target = "image",qualifiedByName = "mapImage")
+    @Mapping(source = "userImage", target = "userImage",qualifiedByName = "mapImage")
     void updateUser(@MappingTarget User user, UserUpdateRequest userUpdateRequest);
 
 }

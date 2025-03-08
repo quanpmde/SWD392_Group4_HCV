@@ -14,24 +14,24 @@ import java.util.Collection;
 @Table(name = "Answer")
 public class Answer {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "answerId")
-    private int answerId;
-
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "questionId", nullable = false)
+    @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @ManyToMany(mappedBy = "answers")
-    private Collection<Test> tests;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "answer_id")
+    private int answerId;
 
-    @Column(name = "answerDescription")
+    @ManyToMany(mappedBy = "answers")
+    private Collection<Attempt> attempts;
+
+    @Column(name = "answer_description")
     private String answerDescription;
 
-    @Column(name = "answerCorrect")
+    @Column(name = "answer_correct")
     private int answerCorrect;
 
-    @Column(name = "answerImage")
+    @Column(name = "answer_image")
     private String answerImage;
 }

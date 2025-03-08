@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -19,7 +18,7 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
+    @Column(name = "user_id")
     int userId;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
@@ -29,34 +28,64 @@ public class User {
     private List<QuestionBank> questionBanks;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Test> tests;
+    private List<Attempt> attempts;
 
-    @Column(name = "fullname", length = 255, unique = true)
-    String fullName;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Payment> payments;
 
-    @Column(name = "username", length = 50)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Message> messages;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Notification> notifications ;
+
+    @ManyToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private List<Class> classes;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Task> tasks ;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts ;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> comments ;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Report> reports ;
+
+    @Column(name = "user_email")
+    String userEmail;
+
+    @Column(name = "user_password")
+    String userPassword;
+
+    @Column(name = "user_name")
     String userName;
 
-    @Column(name = "email", length = 100)
-    String email;
+    @Column(name = "user_role")
+    String userRole;
 
-    @Column(name = "phone", length = 15)
-    String phone;
+    @Column(name = "user_phone")
+    String userPhone;
 
-    @Column(name = "password", length = 255)
-    String password;
+    @Column(name = "user_dob")
+    String userDob;
 
-    @Column(name = "role", length = 50)
-    String role;
+    @Column(name = "user_status")
+    String userStatus ;
 
-    @Column(name = "image")
-    String image;
+    @Column(name = "user_image")
+    String userImage;
 
-    @Column(name = "isVip") 
-    boolean isVip ;
+    @Column(name = "user_vip")
+    int userVip ;
 
-    @Column(name = "active")
-    int isBanned ;
+    @Column(name = "user_balance")
+    int userBalance;
+
+    @Column(name = "user_message")
+    String userMessage;
 
     @Column(name = "otp", length = 10)
     String otp;

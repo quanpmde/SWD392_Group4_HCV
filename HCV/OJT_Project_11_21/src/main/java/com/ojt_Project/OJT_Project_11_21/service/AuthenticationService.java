@@ -29,14 +29,14 @@ public class AuthenticationService {
     @Autowired
     private PasswordEncoder passwordEncoder;
     public AuthenticationResponse login(AuthenticationRequest authenticationRequest){
-        User user = userRepository.findByEmail(authenticationRequest.getEmail()).orElseThrow(
+        User user = userRepository.findByUserEmail(authenticationRequest.getEmail()).orElseThrow(
                 () -> new AppException(ErrorCode.EMAIL_NOT_EXISTED)
 
         );
-        if(user.getIsBanned() == 1){
+        if(user.getUserStatus().equalsIgnoreCase("isBanned")){
             throw new AppException(ErrorCode.USER_IS_BANNED);
         }
-        boolean authenticated = passwordEncoder.matches(authenticationRequest.getPassword(), user.getPassword());
+        boolean authenticated = passwordEncoder.matches(authenticationRequest.getPassword(), user.getUserPassword());
         if (!authenticated)
             throw new AppException(ErrorCode.LOGIN_FAILED);
         var token =generateToken(user);
@@ -46,13 +46,12 @@ public class AuthenticationService {
 
     }
     public User saveOAuth2User(String email, String name) {
-        return userRepository.findByEmail(email).orElseGet(() -> {
+        return userRepository.findByUserEmail(email).orElseGet(() -> {
             User newUser = User.builder()
-                    .email(email)
-                    .fullName(name)
-                    .userName(email)
-                    .isBanned(0)
-                    .role(Role.USER.name())
+                    .userEmail(email)
+                    .userName(name)
+                    .userStatus("noStatus")
+                    .userRole(Role.USER.name())
                     .build();
             return userRepository.save(newUser);
         });
@@ -61,7 +60,7 @@ public class AuthenticationService {
     public String generateToken(User user) {
         JWSHeader header = new JWSHeader(JWSAlgorithm.HS512);
         JWTClaimsSet claimsSet = new JWTClaimsSet.Builder()
-                .subject(user.getEmail())
+                .subject(user.getUserEmail())
                 .issuer("Elearning.com")
                 .issueTime(new Date())
                 .expirationTime(new Date(Instant.now().plus(1, ChronoUnit.HOURS).toEpochMilli()))
@@ -78,8 +77,8 @@ public class AuthenticationService {
         }
     }
     public String buildScope(User user) {
-        if (!StringUtils.isEmpty(user.getRole())) {
-            return "" + user.getRole();
+        if (!StringUtils.isEmpty(user.getUserRole())) {
+            return "" + user.getUserRole();
         }
         return "";
 
