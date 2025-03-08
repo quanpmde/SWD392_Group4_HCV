@@ -1,14 +1,12 @@
 package com.ojt_Project.OJT_Project_11_21.dto.response;
 
 import com.ojt_Project.OJT_Project_11_21.entity.Answer;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor

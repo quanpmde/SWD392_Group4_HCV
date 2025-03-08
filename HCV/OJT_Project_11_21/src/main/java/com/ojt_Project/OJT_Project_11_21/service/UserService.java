@@ -35,7 +35,7 @@ public class UserService{
     private PasswordEncoder passwordEncoder;
 
     public String createNewUser(UserRegisterRequest request)throws IOException {
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByUserEmail(request.getUserEmail())) {
             throw new AppException(ErrorCode.EMAIL_EXISTED);
         }
 
@@ -47,8 +47,8 @@ public class UserService{
 //        }
 
         User user = userMapper.toUser(request);
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(Role.USER.name());
+        user.setUserPassword(passwordEncoder.encode(request.getUserPassword()));
+        user.setUserRole(Role.USER.name());
 //        user.setOtp(otp);
         user.setGenerateOtpTime(LocalDateTime.now());
 
@@ -57,7 +57,7 @@ public class UserService{
     }
 
     public User createUser(UserRegisterRequest request){
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByUserEmail(request.getUserEmail())) {
             throw new AppException(ErrorCode.EMAIL_EXISTED);
         }
         User user = userMapper.toUser(request);
@@ -73,17 +73,17 @@ public class UserService{
 
     public UserResponse getUserByEmail(String email){
         return userMapper.toUserResponse(
-                userRepository.findByEmail(email)
+                userRepository.findByUserEmail(email)
                         .orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED))
         );
     }
 
     public UserResponse updateUserByEmail(String email, UserUpdateRequest request) throws IOException{
-        User user = userRepository.findByEmail(email)
+        User user = userRepository.findByUserEmail(email)
                 .orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
 
-        String relativeImagePath = FileUtil.saveImage(request.getImage(),UPLOAD_DIR);
-        user.setImage(relativeImagePath);
+        String relativeImagePath = FileUtil.saveImage(request.getUserImage(),UPLOAD_DIR);
+        user.setUserImage(relativeImagePath);
 
         userMapper.updateUser(user,request);
         userRepository.save(user);

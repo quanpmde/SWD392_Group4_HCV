@@ -28,11 +28,10 @@ public class AppilcationInitConfig {
             if (userRepository.findByUserName("admin").isEmpty()){
                 User user = User.builder()
                         .userName("admin")
-                        .password("admin")
-                        .email("admin")
-                        .password(passwordEncoder.encode("admin"))
-                        .role(Role.ADMIN.name())
-                        .isBanned(0)
+                        .userEmail("admin")
+                        .userPassword(passwordEncoder.encode("admin"))
+                        .userRole(Role.ADMIN.name())
+                        .userStatus("noStatus")
                         .build();
                 userRepository.save(user);
                 log.warn("admin user has been created with default password: admin, please change it.");

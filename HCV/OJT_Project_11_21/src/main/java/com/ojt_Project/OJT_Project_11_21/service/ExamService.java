@@ -106,9 +106,9 @@ public class ExamService {
 
         ExamResponse examResponse = examMapper.toExamResponse(examRepository.save(exam));
         examResponse.setUserId(user.getUserId());
-        examResponse.setUserImage(user.getImage());
-        examResponse.setFullName(user.getFullName());
-        examResponse.setUserRole(user.getRole());
+        examResponse.setUserImage(user.getUserImage());
+        examResponse.setUserName(user.getUserName());
+        examResponse.setUserRole(user.getUserRole());
         examResponse.setSubjectId(subject.getSubjectId());
         examResponse.setSubjectName(subject.getSubjectName());
 
@@ -181,9 +181,9 @@ public class ExamService {
 
                     // Cập nhật các trường bị thiếu
                     examResponse.setUserId(exam.getUser().getUserId());
-                    examResponse.setUserImage(exam.getUser().getImage());
-                    examResponse.setFullName(exam.getUser().getFullName());
-                    examResponse.setUserRole(exam.getUser().getRole());
+                    examResponse.setUserImage(exam.getUser().getUserImage());
+                    examResponse.setUserName(exam.getUser().getUserName());
+                    examResponse.setUserRole(exam.getUser().getUserRole());
                     examResponse.setSubjectId(exam.getSubject().getSubjectId());
                     examResponse.setSubjectName(exam.getSubject().getSubjectName());
                     return examResponse;
@@ -214,7 +214,7 @@ public class ExamService {
         // Ánh xạ vào DTO để trả về cho người dùng
         ExamResponse examResponse = examMapper.toExamResponse(exam);
         examResponse.setUserId(exam.getUser().getUserId());
-        examResponse.setFullName(exam.getUser().getFullName());
+        examResponse.setUserName(exam.getUser().getUserName());
         examResponse.setSubjectId(exam.getSubject().getSubjectId());
         examResponse.setSubjectName(exam.getSubject().getSubjectName());
 
@@ -267,7 +267,7 @@ public class ExamService {
 
                     // Cập nhật các trường bị thiếu
                     examResponse.setUserId(exam.getUser().getUserId());
-                    examResponse.setFullName(exam.getUser().getFullName());
+                    examResponse.setUserName(exam.getUser().getUserName());
                     examResponse.setSubjectId(exam.getSubject().getSubjectId());
                     examResponse.setSubjectName(exam.getSubject().getSubjectName());
 

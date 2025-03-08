@@ -1,22 +1,20 @@
 package com.ojt_Project.OJT_Project_11_21.dto.response;
 
 import com.ojt_Project.OJT_Project_11_21.entity.QuestionBank;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 public class ExamResponse {
     private int userId;
     private String userImage;
-    private String fullName;
+    private String userName;
     private String userRole;
     private int subjectId;
     private String subjectName;

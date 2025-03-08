@@ -3,7 +3,8 @@ package com.ojt_Project.OJT_Project_11_21.dto.response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor

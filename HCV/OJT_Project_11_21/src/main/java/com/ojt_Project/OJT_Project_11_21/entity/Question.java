@@ -16,11 +16,11 @@ import java.util.List;
 public class Question {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "questionId")
+    @Column(name = "question_id")
     private int questionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "questionBankId",nullable = true)
+    @JoinColumn(name = "question_bank_id",nullable = true)
     private QuestionBank questionBank;
 
     @ManyToMany(mappedBy = "questions",cascade = CascadeType.ALL)
@@ -30,14 +30,14 @@ public class Question {
     private List<Answer> answers;
 
     @ManyToMany(mappedBy = "questions")
-    private Collection<Test> tests;
+    private Collection<Attempt> attempts;
 
-    @Column(name = "questionDescription")
+    @Column(name = "question_description")
     private String questionDescription;
 
-    @Column(name = "questionAnswerExplain")
+    @Column(name = "question_answer_explain")
     private String questionAnswerExplain;
 
-    @Column(name = "questionImage")
+    @Column(name = "question_image")
     private String questionImage;
 }

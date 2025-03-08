@@ -4,17 +4,18 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-@Data
+@Getter
+@Setter
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserCreationRequest {
-    String fullName;
-    String email;
+    String userName;
+    String userEmail;
     @Size(min = 8, message = "PASSWORD_INVALID")
-    String password;
+    String userPassword;
     @Size(min = 10, message = "PHONE_INVALID")
-    String phone;
-    String status;
+    String userPhone;
+    String userStatus;
 }
