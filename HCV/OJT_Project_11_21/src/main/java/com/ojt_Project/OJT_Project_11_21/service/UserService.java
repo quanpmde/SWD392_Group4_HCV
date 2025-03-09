@@ -49,6 +49,7 @@ public class UserService{
         User user = userMapper.toUser(request);
         user.setUserPassword(passwordEncoder.encode(request.getUserPassword()));
         user.setUserRole(Role.USER.name());
+        user.setUserStatus("noStatus");
 //        user.setOtp(otp);
         user.setGenerateOtpTime(LocalDateTime.now());
 
