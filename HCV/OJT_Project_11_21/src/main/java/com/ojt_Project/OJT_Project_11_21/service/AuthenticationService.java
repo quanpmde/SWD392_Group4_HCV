@@ -28,12 +28,12 @@ public class AuthenticationService {
     protected static final String signature ="OG3aRIYXHjOowyfI2MOHbl8xSjoF/B/XwkK6b276SfXAhL3KbizWWuT8LB1YUVvh";
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public AuthenticationResponse login(AuthenticationRequest authenticationRequest){
+    public AuthenticationResponse login(AuthenticationRequest authenticationRequest) {
         User user = userRepository.findByUserEmail(authenticationRequest.getEmail()).orElseThrow(
                 () -> new AppException(ErrorCode.EMAIL_NOT_EXISTED)
 
         );
-        if(user.getUserStatus().equalsIgnoreCase("isBanned")){
+        if("isBanned".equalsIgnoreCase(user.getUserStatus())){
             throw new AppException(ErrorCode.USER_IS_BANNED);
         }
         boolean authenticated = passwordEncoder.matches(authenticationRequest.getPassword(), user.getUserPassword());
