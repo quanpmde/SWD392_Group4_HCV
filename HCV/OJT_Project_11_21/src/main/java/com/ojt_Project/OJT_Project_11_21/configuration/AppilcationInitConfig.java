@@ -7,8 +7,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,13 +19,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Slf4j
 public class AppilcationInitConfig {
 
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
+	PasswordEncoder passwordEncoder;
     @Bean
-    ApplicationRunner applicationRunner(UserRepository userRepository){
-        return args ->{
-            if (userRepository.findByUserName("admin").isEmpty()){
+    @ConditionalOnProperty(
+            prefix = "spring",
+            value = "datasource.driverClassName",
+            havingValue = "com.mysql.cj.jdbc.Driver")
+    ApplicationRunner applicationRunner(UserRepository userRepository) {
+        log.info("Initializing application.....");
+        return args -> {
+        	if (userRepository.findByUserName("admin").isEmpty()){
                 User user = User.builder()
                         .userName("admin")
                         .userEmail("admin")
@@ -36,6 +39,7 @@ public class AppilcationInitConfig {
                 userRepository.save(user);
                 log.warn("admin user has been created with default password: admin, please change it.");
             }
+            log.info("Application initialization completed .....");
         };
     }
 }

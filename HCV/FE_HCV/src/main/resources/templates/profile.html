@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default/default}">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile</title>
+</head>
+
+<body>
+
+  <th:block layout:fragment="content">
+    <div id="view-mode" class="container mt-5 mb-5">
+      <div class="row">
+        <!-- Left column: Avatar and personal information -->
+        <div class="col-md-4">
+          <div class="card">
+            <img id="user-ava" class="card-img-top" alt="Avatar">
+            <div class="card-body text-center">
+              <h5 id="user-name" class="card-title">USER Name</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: Detailed information -->
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Personal Information</h5>
+              <ul class="list-group">
+                <li class="list-group-item"><strong>Email:</strong> <i id="user-email">example@email.com</i></li>
+                <li class="list-group-item"><strong>Phone Number:</strong> <i id="user-phone">123-456-7890</i></li>
+                <li class="list-group-item"><strong>Date of Birth:</strong> <i id="user-dob">YYYY-MM-DD</i></li>
+                <li class="list-group-item"><strong>VIP Status:</strong> <i id="user-vip">No</i></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Social Media</h5>
+              <div>
+                <a href="https://facebook.com" class="btn btn-outline-primary me-2" target="_blank">Facebook</a>
+                <a href="https://twitter.com" class="btn btn-outline-info me-2" target="_blank">Twitter</a>
+                <a href="https://github.com" class="btn btn-outline-dark" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 d-flex justify-content-end">
+            <button type="button" id="update-me" class="btn btn-primary btn-lg">Edit Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+<!-- Updatemode start -->
+    <div id="update-mode" class="container mt-5 mb-5">
+      <div class="row">
+        <!-- Left column: Avatar and personal information -->
+        <div class="col-md-4">
+          <div class="card">
+            <div class="avatar-container position-relative">
+              <img id="user-ava" class="avatar-img p-2"alt="Avatar">
+
+              <label for="upload-avatar" class="avatar-upload-btn">
+                <i class="fas fa-camera">Upload</i> 
+              </label>
+
+              <input type="file" id="upload-avatar" class="d-none">
+            </div>
+
+
+            <div class="card-body text-center">
+              <input id="user-name" class="form-control" value="example@email.com" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column: Detailed information -->
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Personal Information</h5>
+              <ul class="list-group">
+                <li class="list-group-item">
+                  <strong>Email:</strong>
+                  <input type="email" id="user-email" class="form-control" value="example@email.com" disabled>
+                </li>
+                <li class="list-group-item">
+                  <strong>Phone Number:</strong>
+                  <input type="text" id="user-phone" class="form-control" value="123-456-7890">
+                </li>
+                <li class="list-group-item">
+                  <strong>Date of Birth:</strong>
+                  <input type="date" id="user-dob" class="form-control" value="2000-01-01">
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-body">
+              <h5 class="card-title">Social Media</h5>
+              <div>
+                <a href="https://facebook.com" class="btn btn-outline-primary me-2" target="_blank">Facebook</a>
+                <a href="https://twitter.com" class="btn btn-outline-info me-2" target="_blank">Twitter</a>
+                <a href="https://github.com" class="btn btn-outline-dark" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 mb-5 d-flex justify-content-end">
+            <button type="button" id="save-btn" class="btn btn-warning btn-lg me-2">Save Infomation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Updatemode end -->
+
+  </th:block>
+
+  <th:block layout:fragment="script">
+    <script th:src="@{/js/profile.js}"></script>
+  </th:block>
+</body>
+
+</html>
