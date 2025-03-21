@@ -1,0 +1,33 @@
+<th:block th:fragment="navbar">
+     <!-- Navbar Start -->
+  <nav class="navbar navbar-expand-lg bg-white navbar-light shadow sticky-top p-2">
+    <a href="home" class="navbar-brand d-flex align-items-center px-4 px-lg-5">
+      <h2 class="m-0 text-primary"><i class="fa fa-book me-3"> </i> THI247</h2>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarCollapse" style="justify-content: space-evenly">
+      <a href="home" class="nav-item nav-link tag active">Trang Chủ</a>
+      <a href="forum" class="nav-item nav-link tag">Diễn Đàn</a>
+      <a href="exam" class="nav-item nav-link tag">Kiểm Tra</a>
+      <a href="quizlet" class="nav-item nav-link tag">Tự học</a>
+    </div>
+
+  <!-- <div  id="loginp">
+    <a href="login" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">Tham gia ngay <i
+        class="fa fa-arrow-right ms-3" style="right: 100%"></i></a>
+  </div>
+
+    <div class=" mx-5" id="user-info" >
+      <img src="https://i.pravatar.cc/150?img=10" alt="Avatar" class="avatar dropdown-toggle mx-5" id="avatarDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="avatarDropdown">
+            <li><a class="dropdown-item" href="#">Setting</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item text-danger" id="logout" href="#">Log Out</a></li>
+      </ul>
+    </div> -->
+    <div id="auth-container"></div>
+
+    
+    
+  </nav>
+  <!-- Navbar End -->
+</th:block>

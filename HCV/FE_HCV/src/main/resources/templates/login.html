@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{default/non_default}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>THI247</title>
+  <link href="img/THI247.png" rel="icon">
+</head>
+<body>
+
+   <th:block layout:fragment="content">
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+      <div id="loginForm" class="card p-4 shadow" style="max-width: 400px; width: 100%">
+        <h2 class="text-center text-primary">Đăng nhập</h2>
+        <form>
+          <input id="login-email" class="form-control my-2" type="email" placeholder="Email" required>
+          <input id="login-password" class="form-control my-2" type="password" placeholder="Mật khẩu" required>
+          <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-link">Quên mật khẩu?</button>
+            <button id="login-button" type="button" class="btn btn-primary">Đăng nhập</button>
+          </div>
+          <div class="text-center mt-3">
+            <button type="button" class="btn btn-outline-primary">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" style="height: 20px;">
+              Đăng nhập với Google
+            </button>
+          </div>
+          <p class="text-center mt-2">Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a></p>
+        </form>
+      </div>
+    </div>
+  
+   </th:block>
+    <th:block layout:fragment="script">
+      <script th:src="@{/js/login.js}"></script>
+    </th:block>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="~{default/headsource :: link}"/>
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <th:block th:replace="~{default/navigation :: navbar}"/>
+
+    <!-- Phần nội dung chính, tự mở rộng để đẩy footer xuống -->
+    <main class="flex-grow-1">
+        <th:block layout:fragment="content"/>
+    </main>
+
+    <th:block th:replace="~{default/footer :: footer}"/>
+    
+    <th:block layout:fragment="script"/>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/main.js}"></script>
+</body>
+</html>
