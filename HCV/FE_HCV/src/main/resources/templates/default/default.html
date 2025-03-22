@@ -1,23 +1,64 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <th:block th:replace="~{default/headsource :: link}"/>
+    <th:block th:replace="~{default/headsource :: link}" />
 </head>
+
 <body class="d-flex flex-column min-vh-100">
-    <th:block th:replace="~{default/navigation :: navbar}"/>
+
+    <!-- Confirm Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                   <p id="confirm-mess">Are you sure you want to proceed?</p> 
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="confirmAction">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-danger text-white">
+                    <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="error-mess">An error has occurred. Please try again later.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <th:block th:replace="~{default/navigation :: navbar}" />
 
     <!-- Phần nội dung chính, tự mở rộng để đẩy footer xuống -->
     <main class="flex-grow-1">
-        <th:block layout:fragment="content"/>
+        <th:block layout:fragment="content" />
     </main>
 
-    <th:block th:replace="~{default/footer :: footer}"/>
-    
-    <th:block layout:fragment="script"/>
+    <th:block th:replace="~{default/footer :: footer}" />
+
+    <th:block layout:fragment="script" />
     <script th:src="@{/js/common.js}"></script>
     <script th:src="@{/js/main.js}"></script>
 </body>
+
 </html>

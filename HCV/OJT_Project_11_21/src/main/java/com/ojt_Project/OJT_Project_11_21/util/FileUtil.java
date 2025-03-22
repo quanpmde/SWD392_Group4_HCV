@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class FileUtil {
@@ -81,16 +82,24 @@ public class FileUtil {
         return questions;
     }
 
-    public static String saveImage(MultipartFile image, String UPLOAD_DIR) throws IOException {
+    public static String saveImage(MultipartFile image) throws IOException {
         if (image != null && !image.isEmpty()) {
-            Path uploadPath = Paths.get(UPLOAD_DIR);
+            Path projectRoot = Paths.get(System.getProperty("user.dir")).getParent();
+
+            Path uploadPath = projectRoot.resolve("img");
+
             if (!Files.exists(uploadPath)) {
                 Files.createDirectories(uploadPath);
             }
-            String imagePath = UPLOAD_DIR + image.getOriginalFilename();
-            Files.write(Paths.get(imagePath), image.getBytes());
-            return "img/" + image.getOriginalFilename();
+
+            String fileName = UUID.randomUUID().toString() + "_" + image.getOriginalFilename();
+            Path filePath = uploadPath.resolve(fileName);
+
+            Files.write(filePath, image.getBytes());
+
+            return "img/" + fileName;
         }
         return null;
     }
+
 }

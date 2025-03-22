@@ -74,7 +74,7 @@ public class ExamService {
         // Tạo mới Exam từ request
         Exam exam = examMapper.toExam(request);
 
-        String relativeImagePath = FileUtil.saveImage(request.getExamImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getExamImage());
         exam.setExamImage(relativeImagePath);
 
         // Thiết lập trạng thái ban đầu của bài thi
@@ -304,7 +304,7 @@ public class ExamService {
         Exam exam = examRepository.findById(examId)
                 .orElseThrow(() -> new AppException(ErrorCode.EXAM_NOT_EXISTED));
 
-        String relativeImagePath = FileUtil.saveImage(request.getExamImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getExamImage());
         exam.setExamImage(relativeImagePath);
 
         // Kiểm tra các câu hỏi mới có hợp lệ hay không

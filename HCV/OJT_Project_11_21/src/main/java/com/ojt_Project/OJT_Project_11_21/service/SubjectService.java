@@ -27,7 +27,7 @@ public class SubjectService {
     public SubjectResponse createNewSubject(SubjectRequest request) throws IOException {
         Subject subject = subjectMapper.toSubject(request);
 
-        String relativeImagePath = FileUtil.saveImage(request.getSubjectImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getSubjectImage());
         subject.setSubjectImage(relativeImagePath);
 
         return subjectMapper.toSubjectResponse(subjectRepository.save(subject));
@@ -52,7 +52,7 @@ public class SubjectService {
         Subject subject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new AppException(ErrorCode.SUBJECT_NOT_EXISTED));
 
-        String relativeImagePath = FileUtil.saveImage(request.getSubjectImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getSubjectImage());
         subject.setSubjectImage(relativeImagePath);
 
         subjectMapper.updateSubjectFromRequest(subject, request);

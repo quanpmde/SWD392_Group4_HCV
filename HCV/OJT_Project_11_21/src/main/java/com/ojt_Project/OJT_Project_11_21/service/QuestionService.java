@@ -30,7 +30,7 @@ public class QuestionService {
     public QuestionResponse createNewQuestion(QuestionRequest request) throws IOException{
         Question question = questionMapper.toQuestion(request);
 
-        String relativeImagePath = FileUtil.saveImage(request.getQuestionImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getQuestionImage());
         question.setQuestionImage(relativeImagePath);
 
         return questionMapper.toQuestionResponse(questionRepository.save(question));
@@ -59,7 +59,7 @@ public class QuestionService {
         Question question = questionRepository.findById(questionId)
                 .orElseThrow(() -> new AppException(ErrorCode.QUESTION_NOT_EXISTED));
 
-        String relativeImagePath = FileUtil.saveImage(request.getQuestionImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getQuestionImage());
         question.setQuestionImage(relativeImagePath);
 
         questionMapper.updateQuestionFromRequest(question, request);
