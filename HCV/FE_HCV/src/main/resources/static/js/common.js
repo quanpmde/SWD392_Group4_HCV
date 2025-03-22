@@ -212,8 +212,12 @@ function confirmModal(message, successCallback, errorcallback) {
         });
     }
     if (typeof errorcallback === "function") {
-        errorcallback();
+        
+        $("#cancel-confirm").click(function () { 
+            errorcallback();
+        });
     }
+    
 }
 
 function errorModal(message, errorcallback) {
@@ -222,6 +226,8 @@ function errorModal(message, errorcallback) {
     $("#errorModal").modal("show");
 
     if (typeof errorcallback === "function") {
-        errorcallback();
+        $("#cancel-error").click(function () { 
+            errorcallback();
+        });
     }
 } 
