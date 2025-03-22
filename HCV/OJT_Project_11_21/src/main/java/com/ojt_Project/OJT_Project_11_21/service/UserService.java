@@ -1,5 +1,6 @@
 package com.ojt_Project.OJT_Project_11_21.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.openid.connect.sdk.UserInfoRequest;
 import com.ojt_Project.OJT_Project_11_21.dto.request.UserRegisterRequest;
 import com.ojt_Project.OJT_Project_11_21.dto.request.UserUpdateRequest;
@@ -21,14 +22,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 @Slf4j
 @Service
 public class UserService{
-    private static final String UPLOAD_DIR ="C:\\Users\\Admin\\Downloads\\OJT_Project_11_21\\img\\";
+	private static final String UPLOAD_DIR = Paths.get("img").toAbsolutePath().toString();
     @Autowired
     private OtpUtil otpUtil;
     @Autowired
@@ -89,12 +94,61 @@ public class UserService{
         User user = userRepository.findByUserEmail(email)
                 .orElseThrow(() -> new AppException(ErrorCode.EMAIL_NOT_EXISTED));
 
-        String relativeImagePath = FileUtil.saveImage(request.getUserImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getUserImage());
         user.setUserImage(relativeImagePath);
 
         userMapper.updateUser(user,request);
         userRepository.save(user);
         return userMapper.toUserResponse(user);
+    }
+    
+    public UserMe updateUser(UserUpdateRequest request) throws IOException{
+        User user = userRepository.findById(request.getUserId()).orElseThrow(() -> new AppException(ErrorCode.USER_IS_NOT_FOUNDED));
+
+        userMapper.updateUser(user,request);
+        userRepository.save(user);
+        return userMapper.toUserMe(user);
+    }
+    
+    public UserMe updateUserImage(String id, MultipartFile file) throws IOException {
+        User user = userRepository.findById(Integer.parseInt(id))
+                .orElseThrow(() -> new AppException(ErrorCode.USER_IS_NOT_FOUNDED));
+
+        File uploadDir = new File(UPLOAD_DIR);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+
+        if(file != null && !file.isEmpty()) {
+        	String relativeImagePath = FileUtil.saveImage(file);
+        user.setUserImage(relativeImagePath);
+        }
+
+        userRepository.save(user);
+        return userMapper.toUserMe(user);
+    }
+    
+    public UserMe updateUserInfo( String data, MultipartFile file) throws IOException {
+    	ObjectMapper obj = new ObjectMapper();
+    	
+    	UserUpdateRequest request =obj.readValue(data, UserUpdateRequest.class);
+        User user = userRepository.findById(request.getUserId())
+                .orElseThrow(() -> new AppException(ErrorCode.USER_IS_NOT_FOUNDED));
+
+        File uploadDir = new File(UPLOAD_DIR);
+        if (!uploadDir.exists()) {
+            uploadDir.mkdirs();
+        }
+        
+        if(file != null && !file.isEmpty()) {
+        	String relativeImagePath = FileUtil.saveImage(file);
+        user.setUserImage(relativeImagePath);
+        }
+        
+        
+        userMapper.updateUser(user,request);
+        userRepository.save(user);
+        return userMapper.toUserMe(user);
     }
     
     public UserMe getMyInfomation() {

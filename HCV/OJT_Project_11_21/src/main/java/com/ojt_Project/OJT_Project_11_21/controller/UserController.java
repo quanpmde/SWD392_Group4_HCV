@@ -22,11 +22,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -61,6 +64,27 @@ public class UserController {
     public ApiResponse<UserResponse> updateUserByEmail(@PathVariable String email, @RequestBody @Valid UserUpdateRequest request) throws IOException{
         return ApiResponse.<UserResponse>builder()
                 .result(userService.updateUserByEmail(email,request))
+                .build();
+    }
+    
+    @PutMapping("/update-user")
+    public ApiResponse<UserMe> updateUser(@RequestBody @Valid UserUpdateRequest request) throws IOException{
+        return ApiResponse.<UserMe>builder()
+                .result(userService.updateUser(request))
+                .build();
+    }
+    
+    @PutMapping("/image/{id}")
+    public ApiResponse<UserMe> updateUserImage(@PathVariable String id,@RequestPart(value = "file", required = false) MultipartFile file) throws IOException{
+        return ApiResponse.<UserMe>builder()
+                .result(userService.updateUserImage(id,file))
+                .build();
+    } 
+    //tong hop vua json vua file
+    @PutMapping("/update-me")
+    public ApiResponse<UserMe> updateUserInfo(@RequestParam("data") String data,@RequestPart(value = "file", required = false) MultipartFile file) throws IOException{
+        return ApiResponse.<UserMe>builder()
+                .result(userService.updateUserInfo(data,file))
                 .build();
     }
     

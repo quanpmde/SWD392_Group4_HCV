@@ -35,7 +35,7 @@ public class AnswerService {
         Answer answer = answerMapper.toAnswer(request);
         answer.setQuestion(question);
 
-        String relativeImagePath = FileUtil.saveImage(request.getAnswerImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getAnswerImage());
         answer.setAnswerImage(relativeImagePath);
 
         AnswerResponse answerResponse = answerMapper.toAnswerResponse(answerRepository.save(answer));
@@ -60,7 +60,7 @@ public class AnswerService {
         Answer answer = answerRepository.findById(answerId)
                 .orElseThrow(() -> new AppException(ErrorCode.ANSWER_NOT_EXISTED));
 
-        String relativeImagePath = FileUtil.saveImage(request.getAnswerImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getAnswerImage());
         answer.setAnswerImage(relativeImagePath);
 
         answerMapper.updateAnswerFromRequest(answer, request);

@@ -41,7 +41,7 @@ public class QuestionBankService {
         questionBank.setUser(user);  // Thiết lập user
         questionBank.setQuestionBankDate(LocalDateTime.now());
 
-        String relativeImagePath = FileUtil.saveImage(request.getQuestionBankImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getQuestionBankImage());
         questionBank.setQuestionBankImage(relativeImagePath);
 
         return questionBankMapper.toQuestionBankResponse(questionBankRepository.save(questionBank));
@@ -76,7 +76,7 @@ public class QuestionBankService {
 
         questionBank.setUser(user);  // Cập nhật user
 
-        String relativeImagePath = FileUtil.saveImage(request.getQuestionBankImage(),UPLOAD_DIR);
+        String relativeImagePath = FileUtil.saveImage(request.getQuestionBankImage());
         questionBank.setQuestionBankImage(relativeImagePath);
 
         questionBankMapper.updateQuestionBankFromRequest(questionBank, request);

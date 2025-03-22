@@ -1,4 +1,4 @@
-const URL_API="http://localhost:8080/Elearning/"
+const URL_API = "http://localhost:8080/Elearning/"
 const AUTH_TOKEN = localStorage.getItem("authToken");
 
 function getUserId() {
@@ -18,7 +18,7 @@ function getAPI(url, data) {
 
 function postAPI(url, data) {
     return $.ajax({
-        url: URL_API+url,
+        url: URL_API + url,
         type: "POST",
         contentType: "application/json",
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
@@ -28,7 +28,7 @@ function postAPI(url, data) {
 
 function postNoAuAPI(url, data) {
     return $.ajax({
-        url: URL_API+url,
+        url: URL_API + url,
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(data),
@@ -37,7 +37,7 @@ function postNoAuAPI(url, data) {
 
 function putAPI(url, data) {
     return $.ajax({
-        url: URL_API+url,
+        url: URL_API + url,
         type: "PUT",
         contentType: "application/json",
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
@@ -47,7 +47,7 @@ function putAPI(url, data) {
 
 function deleteAPI(url) {
     return $.ajax({
-        url: URL_API+url,
+        url: URL_API + url,
         type: "DELETE",
         contentType: "application/json",
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
@@ -56,9 +56,9 @@ function deleteAPI(url) {
 
 
 //Không cần Param
-function getDataAPI(url,success,errorcallback) {
+function getDataAPI(url, success, errorcallback) {
     return $.ajax({
-        url: URL_API + url ,
+        url: URL_API + url,
         type: "GET",
         contentType: "application/json",
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
@@ -71,9 +71,9 @@ function getDataAPI(url,success,errorcallback) {
     });
 }
 
-function postDataAPI(url,success,error) {
+function postDataAPI(url, success, error) {
     return $.ajax({
-        url: URL_API+url,
+        url: URL_API + url,
         type: "POST",
         contentType: "application/json",
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
@@ -82,9 +82,9 @@ function postDataAPI(url,success,error) {
     });
 }
 
-function getJsonAPI(url,data,success) {
+function getJsonAPI(url, data, successCallback) {
     return $.ajax({
-        url: URL_API + url ,
+        url: URL_API + url,
         type: "GET",
         contentType: "application/json",
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
@@ -101,9 +101,27 @@ function getJsonAPI(url,data,success) {
 }
 
 function postJsonAPI(url, data, successCallback) {
-     $.ajax({
+    $.ajax({
         url: URL_API + url,
         type: "POST",
+        contentType: "application/json",
+        headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (typeof successCallback === "function") {
+                successCallback(response);
+            }
+        },
+        error: function (error) {
+            handleAPIError(error);
+        }
+    });
+}
+
+function putJsonAPI(url, data, successCallback) {
+    $.ajax({
+        url: URL_API + url,
+        type: "PUT",
         contentType: "application/json",
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
         data: JSON.stringify(data),
@@ -123,7 +141,26 @@ function putFormDataAPI(url, formData, successCallback) {
         url: URL_API + url,
         type: "PUT",
         processData: false,
-        contentType: false,
+        contentType:false,
+        headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
+        data: formData,
+        success: function (response) {
+            if (typeof successCallback === "function") {
+                successCallback(response);
+            }
+        },
+        error: function (error) {
+            handleAPIError(error);
+        }
+    });
+}
+
+function postFormDataAPI(url, formData, successCallback) {
+    $.ajax({
+        url: URL_API + url,
+        type: "POST",
+        processData: false,
+        contentType:false,
         headers: AUTH_TOKEN ? { "Authorization": `Bearer ${AUTH_TOKEN}` } : {},
         data: formData,
         success: function (response) {
@@ -140,19 +177,19 @@ function putFormDataAPI(url, formData, successCallback) {
 //ko can authen
 function postJsonDataAPI(url, data, successCallback) {
     $.ajax({
-       url: URL_API + url,
-       type: "POST",
-       contentType: "application/json",
-       data: JSON.stringify(data),
-       success: function (response) {
-           if (typeof successCallback === "function") {
-               successCallback(response);
-           }
-       },
-       error: function (error) {
-           handleAPIError(error);
-       }
-   });
+        url: URL_API + url,
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: function (response) {
+            if (typeof successCallback === "function") {
+                successCallback(response);
+            }
+        },
+        error: function (error) {
+            handleAPIError(error);
+        }
+    });
 }
 
 function handleAPIError(jqXHR) {
@@ -162,3 +199,29 @@ function handleAPIError(jqXHR) {
     }
 
 }
+
+//Hien cac modal
+function confirmModal(message, successCallback, errorcallback) {
+
+    $("#confirm-mess").text(message)
+
+    $("#confirmModal").modal("show");
+    if (typeof successCallback === "function") {
+        $("#confirmAction").click(function () { 
+            successCallback();
+        });
+    }
+    if (typeof errorcallback === "function") {
+        errorcallback();
+    }
+}
+
+function errorModal(message, errorcallback) {
+    $("#error-mess").text(message)
+
+    $("#errorModal").modal("show");
+
+    if (typeof errorcallback === "function") {
+        errorcallback();
+    }
+} 

@@ -10,6 +10,7 @@
 <body>
 
   <th:block layout:fragment="content">
+    <input type="hidden" id="userId">
     <div id="view-mode" class="container mt-5 mb-5">
       <div class="row">
         <!-- Left column: Avatar and personal information -->
@@ -63,7 +64,7 @@
               <img id="user-ava" class="avatar-img p-2"alt="Avatar">
 
               <label for="upload-avatar" class="avatar-upload-btn">
-                <i class="fas fa-camera">Upload</i> 
+                <i class="fas fa-camera">Chang Your Image</i> 
               </label>
 
               <input type="file" id="upload-avatar" class="d-none">
@@ -88,7 +89,7 @@
                 </li>
                 <li class="list-group-item">
                   <strong>Phone Number:</strong>
-                  <input type="text" id="user-phone" class="form-control" value="123-456-7890">
+                  <input type="text" id="user-phone" class="form-control" maxlength="10" pattern="[0-9]*" inputmode="numeric" value="123-456-7890">
                 </li>
                 <li class="list-group-item">
                   <strong>Date of Birth:</strong>
